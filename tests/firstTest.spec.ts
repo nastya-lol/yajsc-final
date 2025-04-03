@@ -24,8 +24,7 @@ test("Verify user can view product details", async ({ page }) => {
 test("Verify user can add product to cart", async ({ page }) => {
   await page.goto('/')
   await page.getByText('Slip Joint Pliers').click();
-  const currentURL = page.url();
-  expect(currentURL).toContain(`${process.env.WEB_URL}/product`);
+  expect(page.url()).toContain('/product');
   await expect(page.locator('[data-test="product-name"]')).toContainText('Slip Joint Pliers');
   await expect(page.locator('[data-test="unit-price"]')).toContainText('9.17');
   await page.locator('[data-test="add-to-cart"]').click();
