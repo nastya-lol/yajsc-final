@@ -1,4 +1,4 @@
-# yet_another_js_course_v3
+# Yet another JS course v3
 TS + PW first tests by Anastasiia Melnychenko aka nastya lool
 
 ## Requirements
