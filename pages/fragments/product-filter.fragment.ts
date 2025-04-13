@@ -7,10 +7,41 @@ export enum SortOption {
   BY_PRICE_IN_DESC = "Price (High - Low)",
 }
 
+export enum HandToolsCategories {
+  HAND_TOOLS = "Hand Tools",
+  HAMMER = "Hammer",
+  HAND_SAW = "Hand Saw",
+  WRENCH = "Wrench",
+  SCREWDRIVER = "Screwdriver",
+  PLIERS = "Pliers",
+  CHISELS = "Chisels",
+  MEASURES = "Measures",
+}
+
+export enum PowerToolsCategories {
+  POWER_TOOLS = "Power Tools",
+  GRINDER = "Grinder",
+  SANDER = "Sander",
+  SAW = "Saw",
+  DRILL = "Drill",
+}
+
 export class ProductFilterComponent {
   readonly sortDropdown: Locator = this.page.getByTestId("sort");
 
   constructor(protected page: Page) {}
+
+  async sortProducts(sortBY: SortOption) {
+    const responsePromise = this.waitForProductsToBeSorted();
+    this.selectSortOption(sortBY);
+    await responsePromise;
+  }
+
+  async filterProducts(filterBY: PowerToolsCategories | HandToolsCategories) {
+    const responsePromise = this.waitForProductsToBeFiltered();
+    await this.page.getByLabel(filterBY).click();
+    await responsePromise;
+  }
 
   async selectSortOption(sortBY: SortOption) {
     switch (sortBY) {
@@ -39,9 +70,14 @@ export class ProductFilterComponent {
         response.request().method() === "GET"
     );
   }
-  async sortProducts(sortBY: SortOption) {
-    const responsePromise = this.waitForProductsToBeSorted();
-    this.selectSortOption(sortBY);
-    await responsePromise;
+
+  async waitForProductsToBeFiltered() {
+    return this.page.waitForResponse(
+      (response) =>
+        response.url().includes("/products?between") &&
+        response.url().includes("by_category") &&
+        response.status() === 200 &&
+        response.request().method() === "GET"
+    );
   }
 }
