@@ -23,7 +23,7 @@ test("Verify user can view product details", async ({ page }) => {
 
   await home.open();
   await home.openProduct(productName);
-  expect(page.url()).toContain(product.path);
+  await expect(page).toHaveURL(product.path);
   await expect(product.productName).toContainText(productName);
   await expect(product.price).toContainText("14.15");
   await expect(product.addToCartButton).toBeVisible();
