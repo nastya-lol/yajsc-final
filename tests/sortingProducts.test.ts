@@ -15,6 +15,6 @@ import { SortOption } from "../pages/fragments/product-filter.fragment";
     await home.open();
 
     await home.productFilter.sortProducts(sortOption);
-    await home.verifyProductsOnPageSorted(sortOption);
+    await home.verifyProductsSorted(sortOption);
   });
 });

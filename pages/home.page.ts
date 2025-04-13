@@ -6,24 +6,6 @@ import {
   SortOption,
 } from "./fragments/product-filter.fragment";
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  is_location_offer: boolean;
-  is_rental: boolean;
-  in_stock: boolean;
-  product_image: any;
-  category: any;
-  brand: any;
-}
-
-interface ProductList {
-  current_page: number;
-  data: Product[];
-}
-
 export class HomePage {
   readonly path: string = "/";
   readonly productFilter = new ProductFilterComponent(this.page);
@@ -62,7 +44,7 @@ export class HomePage {
     } else console.log("There are no products found.");
   }
 
-  async verifyProductsOnPageSorted(sortOption: SortOption) {
+  async verifyProductsSorted(sortOption: SortOption) {
     const titleProducts: string[] = await this.getAllProductsOnPage();
     const priceProducts: number[] = await this.getAllProductsPricesOnPage();
     switch (sortOption) {
