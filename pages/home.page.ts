@@ -25,7 +25,7 @@ export class HomePage {
   }
 
   async getAllProductsOnPage(): Promise<string[]> {
-    return await this.productsTitle.allTextContents();
+    return this.productsTitle.allTextContents();
   }
 
   async getAllProductsPricesOnPage(): Promise<number[]> {

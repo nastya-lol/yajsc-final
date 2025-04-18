@@ -33,7 +33,7 @@ export class ProductFilterComponent {
 
   async sortProducts(sortBY: SortOption) {
     const responsePromise = this.waitForProductsToBeSorted();
-    this.selectSortOption(sortBY);
+    await this.selectSortOption(sortBY);
     await responsePromise;
   }
 
