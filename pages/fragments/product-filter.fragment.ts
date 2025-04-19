@@ -67,7 +67,7 @@ export class ProductFilterComponent {
       (response) =>
         response.url().includes("/products?sort") &&
         response.status() === 200 &&
-        response.request().method() === "GET"
+        response.request().method() === "GET",
     );
   }
 
@@ -77,7 +77,7 @@ export class ProductFilterComponent {
         response.url().includes("/products?between") &&
         response.url().includes("by_category") &&
         response.status() === 200 &&
-        response.request().method() === "GET"
+        response.request().method() === "GET",
     );
   }
 }

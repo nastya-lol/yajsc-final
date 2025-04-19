@@ -34,7 +34,7 @@ export class HomePage {
   }
 
   async verifyProductsFiltered(
-    filterOption: HandToolsCategories | PowerToolsCategories
+    filterOption: HandToolsCategories | PowerToolsCategories,
   ) {
     if (!(await this.noProductsResult.isVisible())) {
       const productsTitle = await this.getAllProductsOnPage();
@@ -50,12 +50,12 @@ export class HomePage {
     switch (sortOption) {
       case SortOption.BY_NAME_IN_ASC:
         expect(titleProducts).toEqual(
-          titleProducts.toSorted((a, b) => a.localeCompare(b))
+          titleProducts.toSorted((a, b) => a.localeCompare(b)),
         );
         break;
       case SortOption.BY_NAME_IN_DESC:
         expect(titleProducts).toEqual(
-          titleProducts.toSorted((a, b) => b.localeCompare(a))
+          titleProducts.toSorted((a, b) => b.localeCompare(a)),
         );
         break;
       case SortOption.BY_PRICE_IN_ASC:
