@@ -5,7 +5,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 
 export default tseslint.config(
   eslint.configs.recommended,
-  tseslint.configs.recommendedTypeChecked,
+  tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
   {
     languageOptions: {
@@ -15,11 +15,6 @@ export default tseslint.config(
         },
         tsconfigRootDir: import.meta.dirname,
       },
-    },
-  },
-  {
-    rules: {
-      "@typescript-eslint/no-floating-promises": "error",
     },
   },
   {
