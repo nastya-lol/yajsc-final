@@ -3,17 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "lint": "npx eslint ."
+  },
   "keywords": [],
   "author": "Anastasiia Melnychenko",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^9.25.0",
     "@playwright/test": "^1.51.1",
-    "@types/node": "^22.14.0"
+    "@types/node": "^22.14.0",
+    "eslint": "^9.25.0",
+    "eslint-plugin-playwright": "^2.2.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "typescript": "^5.8.2"
+    "dotenv": "^16.4.7"
   }
 }
