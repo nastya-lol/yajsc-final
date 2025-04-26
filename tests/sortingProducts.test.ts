@@ -1,5 +1,4 @@
-import { test } from "@playwright/test";
-import { HomePage } from "../pages/home.page";
+import { test } from "../fixtures";
 import { SortOption } from "../pages/fragments/product-filter.fragment";
 
 [
@@ -9,12 +8,11 @@ import { SortOption } from "../pages/fragments/product-filter.fragment";
   { sortOption: SortOption.BY_PRICE_IN_DESC },
 ].forEach(({ sortOption }) => {
   test(`Verify user can perform sorting by name or price in ${sortOption}`, async ({
-    page,
+    app,
   }) => {
-    const home = new HomePage(page);
-    await home.open();
+    await app.homePage.open();
 
-    await home.productFilter.sortProducts(sortOption);
-    await home.verifyProductsSorted(sortOption);
+    await app.homePage.productFilter.sortProducts(sortOption);
+    await app.homePage.verifyProductsSorted(sortOption);
   });
 });

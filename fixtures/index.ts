@@ -4,6 +4,7 @@ import { HomePage } from "../pages/home.page";
 import { ProductPage } from "../pages/product.page";
 import { CheckoutPage } from "../pages/checkout.page";
 import { AccountPage } from "../pages/account.page";
+import { App } from "../pages/app";
 
 type MyFixtures = {
   loginPage: LoginPage;
@@ -12,6 +13,8 @@ type MyFixtures = {
   checkoutPage: CheckoutPage;
   accountPage: AccountPage;
   doLogin: LoginPage;
+  app: App;
+  loggedInApp: App;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -39,5 +42,11 @@ export const test = base.extend<MyFixtures>({
     await loginPage.open();
     await loginPage.doLogin();
     await use(loginPage);
+  },
+  app: async ({ page }, use) => {
+    await use(new App(page));
+  },
+  loggedInApp: async ({ doLogin, page }, use) => {
+    await use(new App(page));
   },
 });
