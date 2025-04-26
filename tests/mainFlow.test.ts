@@ -45,7 +45,7 @@ test("Verify user can add product to cart", async ({ page }) => {
   await expect(product.addedToCartAlert).toBeVisible();
   await product.waitForAlertToDisappear();
   await expect(product.header.cartQuantity).toContainText("1");
-  await product.header.openCart();
+  await product.header.openCheckout();
   await expect(page).toHaveURL(checkout.path);
   await checkout.checkProductsInCheckoutList(1);
   await expect(checkout.productTitle).toContainText(productName);

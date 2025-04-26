@@ -28,4 +28,21 @@ export class ProductPage {
       timeout: 8000,
     });
   }
+  async getName(): Promise<string> {
+    return this.productName.textContent();
+  }
+  async getPrice(): Promise<string> {
+    return this.price.textContent();
+  }
+
+  async addProductToCart() {
+    const responsePromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes("carts") &&
+        response.status() === 200 &&
+        response.request().method() === "POST",
+    );
+    await this.addToCart();
+    await responsePromise;
+  }
 }
