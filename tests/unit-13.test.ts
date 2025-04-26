@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures";
 import { PaymentOption } from "../pages/checkout.page";
 
-test("Verify", async ({
+test("Verify user can order the product", async ({
   doLogin,
   homePage,
   productPage,
