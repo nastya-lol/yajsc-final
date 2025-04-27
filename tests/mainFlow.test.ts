@@ -45,9 +45,9 @@ test("Verify user can add product to cart", async ({ page }) => {
   await expect(product.addedToCartAlert).toBeVisible();
   await product.waitForAlertToDisappear();
   await expect(product.header.cartQuantity).toContainText("1");
-  await product.header.openCart();
+  await product.header.openCheckout();
   await expect(page).toHaveURL(checkout.path);
-  await checkout.checkProductsInCheckoutList(1);
-  await expect(checkout.productTitle).toContainText(productName);
-  await expect(checkout.checkOutProceedButton).toBeVisible();
+  await checkout.cartStep.checkProductsInCheckoutList(1);
+  await expect(checkout.cartStep.productTitle).toContainText(productName);
+  await expect(checkout.cartStep.checkOutProceedButton).toBeVisible();
 });

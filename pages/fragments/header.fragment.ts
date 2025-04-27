@@ -6,7 +6,7 @@ export class HeaderFragment {
 
   constructor(protected page: Page) {}
 
-  async openCart() {
+  async openCheckout() {
     await this.navCartButton.click();
   }
 }
