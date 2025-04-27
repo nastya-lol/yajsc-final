@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures";
-import { PaymentOption } from "../pages/checkout.page";
+import { PaymentOption } from "../pages/checkout-steps/payment";
 
-test("Verify user can order the product", async ({ loggedInApp, page }) => {
+test("Verify user can order the product", async ({ loginApp, page }) => {
   await expect(page).toHaveURL(loggedInApp.accountPage.path);
   await loggedInApp.homePage.open();
   await loggedInApp.homePage.openFirstProduct();
@@ -29,7 +29,6 @@ test("Verify user can order the product", async ({ loggedInApp, page }) => {
   );
   await loggedInApp.checkoutPage.paymentStep.creditCardMethod.inputRequiredFields(
     "1111-1111-1111-1111",
-    "07/2025",
     "111",
     process.env.USER_NAME,
   );
