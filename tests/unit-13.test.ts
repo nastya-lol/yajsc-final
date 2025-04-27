@@ -1,9 +1,9 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures";
-import { PaymentOption } from "../pages/checkout.page";
+import { PaymentOption } from "../pages/checkout-steps/payment";
 
 test("Verify user can order the product", async ({
-  doLogin,
+  loginApp,
   homePage,
   productPage,
   checkoutPage,
@@ -31,7 +31,6 @@ test("Verify user can order the product", async ({
   await checkoutPage.paymentStep.selectPaymentMethod(PaymentOption.CREDIT_CARD);
   await checkoutPage.paymentStep.creditCardMethod.inputRequiredFields(
     "1111-1111-1111-1111",
-    "07/2025",
     "111",
     process.env.USER_NAME,
   );

@@ -11,7 +11,7 @@ type MyFixtures = {
   productPage: ProductPage;
   checkoutPage: CheckoutPage;
   accountPage: AccountPage;
-  doLogin: LoginPage;
+  loginApp: LoginPage;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -35,7 +35,7 @@ export const test = base.extend<MyFixtures>({
     await use(new AccountPage(page));
   },
 
-  doLogin: async ({ loginPage }, use) => {
+  loginApp: async ({ loginPage }, use) => {
     await loginPage.open();
     await loginPage.doLogin();
     await use(loginPage);

@@ -17,10 +17,12 @@ export class CreditCardPaymentFragment {
 
   async inputRequiredFields(
     cardNumber: string,
-    expirationDate: string,
     cvvInput: string,
     cardHolderName: string,
   ) {
+    const date = new Date(Date.now());
+    date.setUTCMonth(date.getUTCMonth() + 3);
+    const expirationDate = `${(date.getUTCMonth() + 1).toString().padStart(2, "0")}/${date.getUTCFullYear()}`;
     await this.cardNumberInput.fill(cardNumber);
     await this.expirationDateInput.fill(expirationDate);
     await this.cvvInput.fill(cvvInput);
@@ -32,7 +34,7 @@ export class CreditCardPaymentFragment {
   }
 
   async checkPaymentSuccessMessage() {
-    await expect(this.paymentSuccessMessage).toContainText(
+    await expect(this.paymentSuccessMessage).toHaveText(
       "Payment was successful",
     );
   }
