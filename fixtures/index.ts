@@ -46,7 +46,7 @@ export const test = base.extend<MyFixtures>({
   app: async ({ page }, use) => {
     await use(new App(page));
   },
-  loggedInApp: async ({ doLogin, page }, use) => {
+  loggedInApp: async ({ loginApp, page }, use) => {
     await use(new App(page));
   },
 });
