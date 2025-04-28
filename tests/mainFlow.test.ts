@@ -1,53 +1,43 @@
-import { test, expect } from "@playwright/test";
-import { LoginPage } from "../pages/login.page";
-import { HomePage } from "../pages/home.page";
-import { AccountPage } from "../pages/account.page";
-import { ProductPage } from "../pages/product.page";
-import { CheckoutPage } from "../pages/checkout.page";
+import { expect } from "@playwright/test";
+import { test } from "../fixtures";
 
-test("Verify login with valid credentials", async ({ page }) => {
-  const login = new LoginPage(page);
-  const account = new AccountPage(page);
-
-  await login.open();
-  await login.doLogin();
-  await expect(page).toHaveURL(account.path);
-  await expect(account.title).toContainText("My account");
-  await expect(account.navMenu).toContainText(process.env.USER_NAME);
+test("Verify login with valid credentials", async ({ app, page }) => {
+  await app.loginPage.open();
+  await app.loginPage.doLogin();
+  await expect(page).toHaveURL(app.accountPage.path);
+  await expect(app.accountPage.title).toContainText("My account");
+  await expect(app.accountPage.navMenu).toContainText(process.env.USER_NAME);
 });
 
-test("Verify user can view product details", async ({ page }) => {
-  const home = new HomePage(page);
-  const product = new ProductPage(page);
+test("Verify user can view product details", async ({ app, page }) => {
   const productName = "Combination Pliers";
 
-  await home.open();
-  await home.openProduct(productName);
+  await app.homePage.open();
+  await app.homePage.openProduct(productName);
   await expect(page).toHaveURL(/product/);
-  await expect(product.productName).toContainText(productName);
-  await expect(product.price).toContainText("14.15");
-  await expect(product.addToCartButton).toBeVisible();
-  await expect(product.addToFavoritesButton).toBeVisible();
+  await expect(app.productPage.productName).toContainText(productName);
+  await expect(app.productPage.price).toContainText("14.15");
+  await expect(app.productPage.addToCartButton).toBeVisible();
+  await expect(app.productPage.addToFavoritesButton).toBeVisible();
 });
 
-test("Verify user can add product to cart", async ({ page }) => {
-  const home = new HomePage(page);
-  const product = new ProductPage(page);
-  const checkout = new CheckoutPage(page);
+test("Verify user can add product to cart", async ({ app, page }) => {
   const productName = "Slip Joint Pliers";
 
-  await home.open();
-  await home.openProduct(productName);
+  await app.homePage.open();
+  await app.homePage.openProduct(productName);
   await expect(page).toHaveURL(/product/);
-  await expect(product.productName).toContainText(productName);
-  await expect(product.price).toContainText("9.17");
-  await product.addToCart();
-  await expect(product.addedToCartAlert).toBeVisible();
-  await product.waitForAlertToDisappear();
-  await expect(product.header.cartQuantity).toContainText("1");
-  await product.header.openCheckout();
-  await expect(page).toHaveURL(checkout.path);
-  await checkout.cartStep.checkProductsInCheckoutList(1);
-  await expect(checkout.cartStep.productTitle).toContainText(productName);
-  await expect(checkout.cartStep.checkOutProceedButton).toBeVisible();
+  await expect(app.productPage.productName).toContainText(productName);
+  await expect(app.productPage.price).toContainText("9.17");
+  await app.productPage.addToCart();
+  await expect(app.productPage.addedToCartAlert).toBeVisible();
+  await app.productPage.waitForAlertToDisappear();
+  await expect(app.productPage.header.cartQuantity).toContainText("1");
+  await app.productPage.header.openCheckout();
+  await expect(page).toHaveURL(app.checkoutPage.path);
+  await app.checkoutPage.cartStep.checkProductsInCheckoutList(1);
+  await expect(app.checkoutPage.cartStep.productTitle).toContainText(
+    productName,
+  );
+  await expect(app.checkoutPage.cartStep.checkOutProceedButton).toBeVisible();
 });

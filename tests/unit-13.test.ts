@@ -4,36 +4,38 @@ import { PaymentOption } from "../pages/checkout-steps/payment";
 
 test("Verify user can order the product", async ({
   loginApp,
-  homePage,
-  productPage,
-  checkoutPage,
-  accountPage,
+  loggedInApp,
   page,
 }) => {
-  await expect(page).toHaveURL(accountPage.path);
-  await homePage.open();
-  await homePage.openFirstProduct();
-  await productPage.addProductToCart();
-  const productName = await productPage.getName();
-  const productPrice = await productPage.getPrice();
+  await expect(page).toHaveURL(loggedInApp.accountPage.path);
+  await loggedInApp.homePage.open();
+  await loggedInApp.homePage.openFirstProduct();
+  await loggedInApp.productPage.addProductToCart();
+  const productName = await loggedInApp.productPage.getName();
+  const productPrice = await loggedInApp.productPage.getPrice();
 
-  await checkoutPage.open();
-  await checkoutPage.cartStep.checkProductName(productName);
-  await checkoutPage.cartStep.checkProductPrice(productPrice);
-  await checkoutPage.cartStep.proceedCheckout();
+  await loggedInApp.checkoutPage.open();
+  await loggedInApp.checkoutPage.cartStep.checkProductName(productName);
+  await loggedInApp.checkoutPage.cartStep.checkProductPrice(productPrice);
+  await loggedInApp.checkoutPage.cartStep.proceedCheckout();
 
-  await checkoutPage.signInStep.checkUserLoggedText();
-  await checkoutPage.signInStep.proceedCheckout();
+  await loggedInApp.checkoutPage.signInStep.checkUserLoggedText();
+  await loggedInApp.checkoutPage.signInStep.proceedCheckout();
 
-  await checkoutPage.billingAddressStep.inputRequiredFields("any", "1234");
-  await checkoutPage.billingAddressStep.proceedCheckout();
+  await loggedInApp.checkoutPage.billingAddressStep.inputRequiredFields(
+    "any",
+    "1234",
+  );
+  await loggedInApp.checkoutPage.billingAddressStep.proceedCheckout();
 
-  await checkoutPage.paymentStep.selectPaymentMethod(PaymentOption.CREDIT_CARD);
-  await checkoutPage.paymentStep.creditCardMethod.inputRequiredFields(
+  await loggedInApp.checkoutPage.paymentStep.selectPaymentMethod(
+    PaymentOption.CREDIT_CARD,
+  );
+  await loggedInApp.checkoutPage.paymentStep.creditCardMethod.inputRequiredFields(
     "1111-1111-1111-1111",
     "111",
     process.env.USER_NAME,
   );
-  await checkoutPage.paymentStep.creditCardMethod.confirm();
-  await checkoutPage.paymentStep.creditCardMethod.checkPaymentSuccessMessage();
+  await loggedInApp.checkoutPage.paymentStep.creditCardMethod.confirm();
+  await loggedInApp.checkoutPage.paymentStep.creditCardMethod.checkPaymentSuccessMessage();
 });
