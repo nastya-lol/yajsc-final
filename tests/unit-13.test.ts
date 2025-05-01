@@ -1,13 +1,7 @@
-import { expect } from "@playwright/test";
 import { test } from "../fixtures";
 import { PaymentOption } from "../pages/checkout-steps/payment";
 
-test("Verify user can order the product", async ({
-  loginApp,
-  loggedInApp,
-  page,
-}) => {
-  await expect(page).toHaveURL(loggedInApp.accountPage.path);
+test("Verify user can order the product", async ({ loggedInApp }) => {
   await loggedInApp.homePage.open();
   await loggedInApp.homePage.openFirstProduct();
   await loggedInApp.productPage.addProductToCart();
@@ -24,17 +18,17 @@ test("Verify user can order the product", async ({
 
   await loggedInApp.checkoutPage.billingAddressStep.inputRequiredFields(
     "any",
-    "1234",
+    "1234"
   );
   await loggedInApp.checkoutPage.billingAddressStep.proceedCheckout();
 
   await loggedInApp.checkoutPage.paymentStep.selectPaymentMethod(
-    PaymentOption.CREDIT_CARD,
+    PaymentOption.CREDIT_CARD
   );
   await loggedInApp.checkoutPage.paymentStep.creditCardMethod.inputRequiredFields(
     "1111-1111-1111-1111",
     "111",
-    process.env.USER_NAME,
+    process.env.USER_NAME
   );
   await loggedInApp.checkoutPage.paymentStep.creditCardMethod.confirm();
   await loggedInApp.checkoutPage.paymentStep.creditCardMethod.checkPaymentSuccessMessage();
