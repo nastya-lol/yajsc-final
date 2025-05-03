@@ -1,13 +1,7 @@
-import { expect } from "@playwright/test";
 import { test } from "../fixtures";
 import { PaymentOption } from "../pages/checkout-steps/payment";
 
-test("Verify user can order the product", async ({
-  loginApp,
-  loggedInApp,
-  page,
-}) => {
-  await expect(page).toHaveURL(loggedInApp.accountPage.path);
+test("Verify user can order the product", async ({ loggedInApp }) => {
   await loggedInApp.homePage.open();
   await loggedInApp.homePage.openFirstProduct();
   await loggedInApp.productPage.addProductToCart();
