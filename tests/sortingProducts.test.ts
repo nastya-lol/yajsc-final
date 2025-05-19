@@ -13,10 +13,14 @@ import { SortOption } from "../pages/fragments/product-filter.fragment";
       tag: "@smoke",
     },
     async ({ app }) => {
-      await app.homePage.open();
+      await test.step("Open Home page", async () => {
+        await app.homePage.open();
+      });
 
-      await app.homePage.productFilter.sortProducts(sortOption);
-      await app.homePage.verifyProductsSorted(sortOption);
-    },
+      await test.step(`Filter products by ${sortOption}`, async () => {
+        await app.homePage.productFilter.sortProducts(sortOption);
+        await app.homePage.verifyProductsSorted(sortOption);
+      });
+    }
   );
 });
