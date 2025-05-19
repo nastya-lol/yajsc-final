@@ -3,9 +3,15 @@ on:
   push:
     branches: [ main, master]
 jobs:
-  test:
-    timeout-minutes: 60
+  test-regression:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
+    env:
+      WEB_URL: ${{ vars.WEB_URL }}
+      USER_EMAIL: ${{ secrets.SER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      USER_NAME: ${{ secrets.USER_NAME }}
+      TESTOMAT_API_KEY: ${{ secrets.TESTOMAT_API_KEY }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -16,7 +22,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test -grep @regression
+      run: npx playwright test -grep "@regression"
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
