@@ -2,6 +2,8 @@ name: Playwright Smoke Tests
 on:
   push:
     branches: [main, master]
+  pull_request:
+    branches: [main, master]
 jobs:
   test-smoke:
     timeout-minutes: 10
