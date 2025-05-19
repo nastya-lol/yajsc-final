@@ -54,8 +54,6 @@ export default defineConfig({
       dependencies: ["auth"],
     },
 
-    { name: "smoke", grep: /smoke/ },
-
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
