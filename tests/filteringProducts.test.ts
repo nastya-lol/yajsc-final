@@ -13,9 +13,9 @@ test(
 
     await test.step(`Filter products by ${PowerToolsCategories.SANDER}`, async () => {
       await app.homePage.productFilter.filterProducts(
-        PowerToolsCategories.SANDER
+        PowerToolsCategories.SANDER,
       );
       await app.homePage.verifyProductsFiltered(PowerToolsCategories.SANDER);
     });
-  }
+  },
 );

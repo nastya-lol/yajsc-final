@@ -40,7 +40,7 @@ test(
     await test.step("Set billing address data", async () => {
       await loggedInApp.checkoutPage.billingAddressStep.inputRequiredFields(
         "any",
-        "1234"
+        "1234",
       );
     });
 
@@ -50,7 +50,7 @@ test(
 
     await test.step(`Select payment method: ${PaymentOption.CREDIT_CARD}`, async () => {
       await loggedInApp.checkoutPage.paymentStep.selectPaymentMethod(
-        PaymentOption.CREDIT_CARD
+        PaymentOption.CREDIT_CARD,
       );
     });
 
@@ -58,7 +58,7 @@ test(
       await loggedInApp.checkoutPage.paymentStep.creditCardMethod.inputRequiredFields(
         "1111-1111-1111-1111",
         "111",
-        process.env.USER_NAME
+        process.env.USER_NAME,
       );
     });
 
@@ -66,5 +66,5 @@ test(
       await loggedInApp.checkoutPage.paymentStep.creditCardMethod.confirm();
       await loggedInApp.checkoutPage.paymentStep.creditCardMethod.checkPaymentSuccessMessage();
     });
-  }
+  },
 );

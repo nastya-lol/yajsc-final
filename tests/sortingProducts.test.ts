@@ -21,6 +21,6 @@ import { SortOption } from "../pages/fragments/product-filter.fragment";
         await app.homePage.productFilter.sortProducts(sortOption);
         await app.homePage.verifyProductsSorted(sortOption);
       });
-    }
+    },
   );
 });

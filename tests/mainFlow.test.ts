@@ -20,7 +20,7 @@ test(
       await expect(app.productPage.addToCartButton).toBeVisible();
       await expect(app.productPage.addToFavoritesButton).toBeVisible();
     });
-  }
+  },
 );
 
 test(
@@ -55,11 +55,11 @@ test(
       await expect(page).toHaveURL(app.checkoutPage.path);
       await app.checkoutPage.cartStep.checkProductsInCheckoutList(1);
       await expect(app.checkoutPage.cartStep.productTitle).toContainText(
-        productName
+        productName,
       );
       await expect(
-        app.checkoutPage.cartStep.checkOutProceedButton
+        app.checkoutPage.cartStep.checkOutProceedButton,
       ).toBeVisible();
     });
-  }
+  },
 );
